@@ -36,7 +36,7 @@ public class GumballMachineController {
             throw new RuntimeException(e);
         }
     }
-
+/*
     @PutMapping("/insert-quarter")
     public TransitionResult insertQuarter(@RequestBody TransitionRequest transitionRequest) {
         try {
@@ -59,6 +59,15 @@ public class GumballMachineController {
     public TransitionResult turnCrank(@RequestBody TransitionRequest transitionRequest) {
         try {
             return gumballService.turnCrank(transitionRequest.id());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }*/
+
+    @PutMapping("/handle-all-states")
+    public TransitionResult handleAllStates(@RequestBody TransitionRequest transitionRequest) {
+        try {
+            return gumballService.handleAllStates(transitionRequest.id());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

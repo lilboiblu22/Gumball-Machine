@@ -65,7 +65,8 @@ public class GumballMachine implements IGumballMachine {
             message = "You turned, but there are no gumballs";
         } else if (state.equalsIgnoreCase(HAS_QUARTER)) {
             message = "You turned...";
-            return dispense();
+            state = SOLD;
+            succeeded = true;
         }
         return new TransitionResult(succeeded, message, state, count);
     }
@@ -94,6 +95,23 @@ public class GumballMachine implements IGumballMachine {
 
     @Override
     public void changeTheStateTo(GumballMachineState name) {
+        this.state = name.name();
+    }
+
+    public TransitionResult handleAllStates(){
+        if(state.equalsIgnoreCase(HAS_QUARTER)){
+            return ejectQuarter();
+        }
+        else if(state.equalsIgnoreCase(NO_QUARTER)){
+            return insertQuarter();
+        }
+        else if(state.equalsIgnoreCase(SOLD)){
+            return dispense();
+        }
+        else if(state.equalsIgnoreCase(SOLD_OUT)){
+            return new TransitionResult(false, "No gumball dispensed", state, count);
+        }
+        return new TransitionResult(false, "No gumball dispensed", state, count);
 
     }
 

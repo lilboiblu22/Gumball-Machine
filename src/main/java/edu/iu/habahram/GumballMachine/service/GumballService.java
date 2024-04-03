@@ -58,6 +58,18 @@ public class GumballService implements IGumballService{
         return result;
     }
 
+    public TransitionResult handleAllStates(String id) throws IOException {
+        GumballMachineRecord record = gumballRepository.findById(id);
+        IGumballMachine machine = new GumballMachine(record.getId(), record.getState(), record.getCount());
+        TransitionResult result = machine.handleAllStates();
+        if(result.succeeded()) {
+            record.setState(result.stateAfter());
+            record.setCount(result.countAfter());
+            save(record);
+        }
+        return result;
+    }
+
     
 
     @Override
