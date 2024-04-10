@@ -17,5 +17,5 @@ public interface IGumballService {
 
     String save(GumballMachineRecord gumballMachineRecord) throws IOException;
 
-    TransitionResult handleAllStates(String id);
+    TransitionResult handleAllStates(String id) throws IOException;
 }
