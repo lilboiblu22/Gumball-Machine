@@ -25,6 +25,7 @@ public class SoldState implements IState{
     @Override
     public TransitionResult turnCrank() {
         String message = "You turned the crank..";
+        dispense();
         boolean succeeded = true;
         return new TransitionResult(succeeded, message, gumballMachine.getTheStateName(), gumballMachine.getCount());
     }

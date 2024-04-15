@@ -26,6 +26,7 @@ public class HasQuarterState implements IState{
     public TransitionResult turnCrank() {
         String message = "You turned...something is happening...";
         boolean succeeded = true;
+        dispense();
         return new TransitionResult(succeeded, message, gumballMachine.getTheStateName(), gumballMachine.getCount());
     }
 
