@@ -1,9 +1,9 @@
 package edu.iu.habahram.GumballMachine.model;
 
 public class SoldState implements IState{
-    IGumballMachine gumballMachine;
+    GumballMachine2 gumballMachine;
 
-    public SoldState(IGumballMachine gumballMachine){
+    public SoldState(GumballMachine2 gumballMachine){
         this.gumballMachine = gumballMachine;
     }
     @Override
@@ -34,6 +34,14 @@ public class SoldState implements IState{
     public TransitionResult dispense() {
         String message = "Yay you got a gumball";
         boolean succeeded = true;
+        return new TransitionResult(succeeded, message, gumballMachine.getTheStateName(), gumballMachine.getCount());
+    }
+
+    @Override
+    public TransitionResult refill(int count) {
+        String message = "You refilled the gumball machine";
+        boolean succeeded = true;
+        gumballMachine.setCount(count);
         return new TransitionResult(succeeded, message, gumballMachine.getTheStateName(), gumballMachine.getCount());
     }
 

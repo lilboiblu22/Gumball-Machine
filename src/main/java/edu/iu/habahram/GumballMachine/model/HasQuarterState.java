@@ -1,25 +1,25 @@
 package edu.iu.habahram.GumballMachine.model;
 
 public class HasQuarterState implements IState{
-    IGumballMachine gumballMachine;
+    GumballMachine2 gumballMachine2;
 
-    public HasQuarterState (IGumballMachine gumballMachine){
-        this.gumballMachine = gumballMachine;
+    public HasQuarterState (GumballMachine2 gumballMachine){
+        this.gumballMachine2 = gumballMachine;
     }
     @Override
     public TransitionResult insertQuarter() {
-        gumballMachine.changeTheStateTo(GumballMachineState.HAS_QUARTER);
+        gumballMachine2.changeTheStateTo(GumballMachineState.HAS_QUARTER);
         String message = "You inserted a quarter";
         boolean succeeded = true;
-        int count = gumballMachine.getCount();
-        return new TransitionResult(succeeded, message, gumballMachine.getTheStateName(), count);
+        int count = gumballMachine2.getCount();
+        return new TransitionResult(succeeded, message, gumballMachine2.getTheStateName(), count);
     }
 
     @Override
     public TransitionResult ejectQuarter() {
         String message = "You ejected a quarter";
         boolean succeeded = true;
-        return new TransitionResult(succeeded, message, gumballMachine.getTheStateName(), gumballMachine.getCount());
+        return new TransitionResult(succeeded, message, gumballMachine2.getTheStateName(), gumballMachine2.getCount());
     }
 
     @Override
@@ -27,14 +27,22 @@ public class HasQuarterState implements IState{
         String message = "You turned...something is happening...";
         boolean succeeded = true;
         dispense();
-        return new TransitionResult(succeeded, message, gumballMachine.getTheStateName(), gumballMachine.getCount());
+        return new TransitionResult(succeeded, message, gumballMachine2.getTheStateName(), gumballMachine2.getCount());
     }
 
     @Override
     public TransitionResult dispense() {
         String message = "You got a gumball! Yay!";
         boolean succeeded = true;
-        return new TransitionResult(succeeded, message, gumballMachine.getTheStateName(), gumballMachine.getCount());
+        return new TransitionResult(succeeded, message, gumballMachine2.getTheStateName(), gumballMachine2.getCount());
+    }
+
+    @Override
+    public TransitionResult refill(int count) {
+        String message = "You refilled the gumball machine";
+        boolean succeeded = true;
+        gumballMachine2.setCount(count);
+        return new TransitionResult(succeeded, message, gumballMachine2.getTheStateName(), gumballMachine2.getCount());
     }
 
     @Override

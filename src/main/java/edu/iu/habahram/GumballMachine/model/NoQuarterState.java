@@ -1,8 +1,8 @@
 package edu.iu.habahram.GumballMachine.model;
 
 public class NoQuarterState implements IState{
-    IGumballMachine gumballMachine;
-    public NoQuarterState(IGumballMachine gumballMachine) {
+    GumballMachine2 gumballMachine;
+    public NoQuarterState(GumballMachine2 gumballMachine) {
         this.gumballMachine = gumballMachine;
     }
     @Override
@@ -32,8 +32,19 @@ public class NoQuarterState implements IState{
         return new TransitionResult(succeeded, message, gumballMachine.getTheStateName(), gumballMachine.getCount());
 
     }
+
+    @Override
+    public TransitionResult refill(int count) {
+        String message = "You refilled the gumball machine";
+        boolean succeeded = true;
+        gumballMachine.setCount(count);
+        return new TransitionResult(succeeded, message, gumballMachine.getTheStateName(), gumballMachine.getCount());
+    }
+
     @Override
     public String getTheName() {
         return GumballMachineState.NO_QUARTER.name();
     }
+
+
 }

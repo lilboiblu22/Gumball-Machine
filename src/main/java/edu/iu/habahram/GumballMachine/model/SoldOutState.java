@@ -1,8 +1,8 @@
 package edu.iu.habahram.GumballMachine.model;
 
 public class SoldOutState implements IState{
-    IGumballMachine gumballMachine;
-    public SoldOutState(IGumballMachine gumballMachine){
+    GumballMachine2 gumballMachine;
+    public SoldOutState(GumballMachine2 gumballMachine){
         this.gumballMachine = gumballMachine;
     }
     @Override
@@ -30,6 +30,16 @@ public class SoldOutState implements IState{
     public TransitionResult dispense() {
         String message = "Oh no, it's sold out of gumballs";
         boolean succeeded = false;
+        return new TransitionResult(succeeded, message, gumballMachine.getTheStateName(), gumballMachine.getCount());
+    }
+
+    @Override
+    public TransitionResult refill(int count) {
+        //change the state to no quarter
+        gumballMachine.state = new NoQuarterState(gumballMachine);
+        String message = "You refilled the gumball machine";
+        boolean succeeded = true;
+        gumballMachine.setCount(count);
         return new TransitionResult(succeeded, message, gumballMachine.getTheStateName(), gumballMachine.getCount());
     }
 

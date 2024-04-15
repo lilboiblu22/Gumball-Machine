@@ -25,6 +25,11 @@ public class GumballMachine2 implements IGumballMachine{
         return state.getTheName();
     }
 
+    @Override
+    public TransitionResult refill(int id, int count) {
+        return state.refill(count);
+    }
+
     public void setState(IState state) {
         this.state = state;
     }
@@ -40,6 +45,10 @@ public class GumballMachine2 implements IGumballMachine{
         this.id = id;
         this.count = count;
         changeTheStateTo(GumballMachineState.valueOf(stateName));
+    }
+
+    public TransitionResult refill(int count) {
+        return state.refill(count);
     }
     @Override
     public TransitionResult insertQuarter() {

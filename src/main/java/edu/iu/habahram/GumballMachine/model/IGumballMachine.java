@@ -8,6 +8,7 @@ public interface IGumballMachine {
     void changeTheStateTo(GumballMachineState name);
     Integer getCount();
     String getTheStateName();
+    TransitionResult refill(int id, int count);
 
     void releaseBall();
 }
