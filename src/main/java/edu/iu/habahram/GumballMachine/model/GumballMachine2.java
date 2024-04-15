@@ -25,8 +25,6 @@ public class GumballMachine2 implements IGumballMachine{
         return state.getTheName();
     }
 
-
-
     public void setState(IState state) {
         this.state = state;
     }
@@ -55,8 +53,7 @@ public class GumballMachine2 implements IGumballMachine{
 
     @Override
     public TransitionResult turnCrank() {
-        state.turnCrank();
-        return state.dispense();
+        return state.turnCrank();
     }
 
     @Override
